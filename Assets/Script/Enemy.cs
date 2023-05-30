@@ -38,22 +38,25 @@ public class Enemy : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         nav = GetComponent<NavMeshAgent>();
 
-        Invoke("ChaseStart", 2f);
+        Invoke("startMove", 2f);
     }
+
+
+
 
     void Update()
     { 
         Move();
     }
 
-    void ChaseStart()
+    void startMove()
     {
         isChase = true;
         anim.SetBool("isWalk", true);
     }
 
     void Move()
-    {
+    { 
         if (nav.enabled)
         {
             nav.SetDestination(target.position);
@@ -92,7 +95,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec,bool isGrenade)
     {
-        isChase = true;
+
         mat.color = Color.red;
         yield return new WaitForSeconds(0.1f);
 
@@ -104,10 +107,10 @@ public class Enemy : MonoBehaviour
             if (isGrenade)
             {
                 reactVec = reactVec.normalized;
-                reactVec += Vector3.up * 10;
+                reactVec += Vector3.up * 30;
                 rb.freezeRotation = false;
-                rb.AddForce(reactVec * 5, ForceMode.Impulse);
-                rb.AddTorque(reactVec * 15,  ForceMode.Impulse);
+                rb.AddForce(reactVec * 30, ForceMode.Impulse);
+                rb.AddTorque(reactVec * 20,  ForceMode.Impulse);
 
             }
 
@@ -115,7 +118,7 @@ public class Enemy : MonoBehaviour
             {
                 reactVec = reactVec.normalized;
                 reactVec += Vector3.up;
-                rb.AddForce(reactVec * 5, ForceMode.Impulse);
+                rb.AddForce(reactVec * 15, ForceMode.Impulse);
             }
         }
         else
@@ -130,13 +133,13 @@ public class Enemy : MonoBehaviour
 
     void FreezeRotation()
     {
-        //if (isChase)
-        //{
-        //    rb.velocity = Vector3.zero;
-        //    rb.angularVelocity = Vector3.zero;
-        //}
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+
+        if (isChase)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        
 
     }
 
@@ -157,7 +160,7 @@ public class Enemy : MonoBehaviour
                 break;
             case Type.C:
                 targetRadius = 0.5f;
-                targetRange = 30f;
+                targetRange = 25f;
                 break;
         }
 
@@ -179,11 +182,13 @@ public class Enemy : MonoBehaviour
         switch (enemyType)
         {
             case Type.A:
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.2f);
                 meleeArea.enabled = true;
 
                 yield return new WaitForSeconds(1f);
                 meleeArea.enabled = false;
+
+                yield return new WaitForSeconds(1f);
                 break;
 
             case Type.B:
@@ -199,7 +204,7 @@ public class Enemy : MonoBehaviour
                 break;
 
             case Type.C:
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.7f);
                 GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
                 rigidBullet.velocity = transform.forward * 20;

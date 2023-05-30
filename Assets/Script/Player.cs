@@ -379,7 +379,7 @@ public class Player : MonoBehaviour
             Heart -= 1;
             Vector3 reactVec = (transform.position - collision.transform.position).normalized;
             reactVec += Vector3.up;
-            rb.AddForce(reactVec * 5, ForceMode.Impulse);
+            rb.AddForce(reactVec * 10, ForceMode.Impulse);
             rb.velocity = Vector3.zero;
         }
 
@@ -426,11 +426,6 @@ public class Player : MonoBehaviour
                 Bullet enemyBullet = other.GetComponent<Bullet>();
                 Heart -= enemyBullet.damage;
                 StartCoroutine(onDamage());
-
-                if (other.gameObject.GetComponent<Rigidbody>() != null)
-                {
-                    Destroy(other.gameObject);
-                }
 
             }
             
