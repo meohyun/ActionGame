@@ -16,12 +16,23 @@ public class Missile : MonoBehaviour
         transform.Rotate(Vector3.back * 30 * Time.deltaTime);
     }
 
-
-
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Player")
+        {
+
+            // 반동
+            Player player = other.GetComponent<Player>();
+            Vector3 reactVec = other.transform.position - transform.position;
+            reactVec += Vector3.up;
+            player.rb.AddForce(reactVec * 5, ForceMode.Impulse);
+            player.rb.velocity = Vector3.zero;
+            
+            
+            StartCoroutine(MissileHit());
+        }
+
+        if (other.gameObject.tag == "Wall")
         {
             StartCoroutine(MissileHit());
         }
@@ -37,7 +48,5 @@ public class Missile : MonoBehaviour
 
         Destroy(transform.gameObject,0.3f);
 
-        //yield return new WaitForSeconds(0.1f);
-        //meshRen.SetActive(false);
     }
 }

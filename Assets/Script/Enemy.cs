@@ -107,10 +107,11 @@ public class Enemy : MonoBehaviour
             if (isGrenade)
             {
                 reactVec = reactVec.normalized;
-                reactVec += Vector3.up * 30;
+                reactVec += Vector3.up * 20;
                 rb.freezeRotation = false;
-                rb.AddForce(reactVec * 30, ForceMode.Impulse);
-                rb.AddTorque(reactVec * 20,  ForceMode.Impulse);
+                rb.AddForce(reactVec * 20, ForceMode.Impulse);
+                rb.AddTorque(reactVec * 15,  ForceMode.Impulse);
+                
 
             }
 
@@ -118,7 +119,7 @@ public class Enemy : MonoBehaviour
             {
                 reactVec = reactVec.normalized;
                 reactVec += Vector3.up;
-                rb.AddForce(reactVec * 15, ForceMode.Impulse);
+                rb.AddForce(reactVec * 5, ForceMode.Impulse);
             }
         }
         else
@@ -134,11 +135,9 @@ public class Enemy : MonoBehaviour
     void FreezeRotation()
     {
 
-        if (isChase)
-        {
+        
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-        }
         
 
     }

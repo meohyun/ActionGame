@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     int equipWeaponIndex = -1;
 
-    Rigidbody rb;
+    public Rigidbody rb;
 
     bool wDown;
     bool sDown;
@@ -426,6 +426,7 @@ public class Player : MonoBehaviour
                 Bullet enemyBullet = other.GetComponent<Bullet>();
                 Heart -= enemyBullet.damage;
                 StartCoroutine(onDamage());
+
 
             }
             

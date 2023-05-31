@@ -383,6 +383,7 @@ MonoBehaviour:
   MaxCoin: 9999
   MaxHeart: 100
   MaxHasGrenades: 4
+  rb: {fileID: 0}
 --- !u!114 &28724575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5989,7 +5990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 328409505970683906, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4462523135328065168, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
       propertyPath: m_RootOrder
@@ -11504,7 +11505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7179058066410744377, guid: f8d92320af6e248a9b19a66ab7480aed, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7652750053822838807, guid: f8d92320af6e248a9b19a66ab7480aed, type: 3}
       propertyPath: m_Enabled
