@@ -7,8 +7,6 @@ public class Missile : MonoBehaviour
 
     public GameObject missileParticle;
     public GameObject EffectObj;
-    public GameObject meshRen;
-
 
     // Update is called once per frame
     void Update()

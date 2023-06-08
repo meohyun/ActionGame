@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public enum Type { A, B ,C }
+    public enum Type { A, B ,C ,D}
     public Type enemyType;
 
     public int curHp;
@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
 
     public bool isChase;
     public bool isAttack;
+    public bool isDead;
 
     public Transform target;
 
@@ -20,12 +21,14 @@ public class Enemy : MonoBehaviour
 
     public GameObject bullet;
 
-    Rigidbody rb;
-    BoxCollider boxCollider;
-    Material mat;
-    Animator anim;
+    public Rigidbody rb;
+    public BoxCollider boxCollider;
+    public MeshRenderer[] meshs;
+    public Animator anim;
 
-    NavMeshAgent nav;
+    public NavMeshAgent nav;
+
+    public GameManager manager;
 
     Vector3 moveVec;
 
@@ -34,15 +37,14 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
-        mat = GetComponentInChildren<MeshRenderer>().material;
+        meshs = GetComponentsInChildren<MeshRenderer>();
         anim = GetComponentInChildren<Animator>();
         nav = GetComponent<NavMeshAgent>();
 
-        Invoke("startMove", 2f);
+
+        if (enemyType != Type.D)
+            Invoke("startMove", 2f);
     }
-
-
-
 
     void Update()
     { 
@@ -57,7 +59,7 @@ public class Enemy : MonoBehaviour
 
     void Move()
     { 
-        if (nav.enabled)
+        if (nav.enabled && enemyType != Type.D)
         {
             nav.SetDestination(target.position);
             nav.isStopped = !isChase;
@@ -96,13 +98,19 @@ public class Enemy : MonoBehaviour
     IEnumerator OnDamage(Vector3 reactVec,bool isGrenade)
     {
 
-        mat.color = Color.red;
+        foreach (MeshRenderer mesh in meshs)
+        {
+            mesh.material.color = Color.red;
+        }
         yield return new WaitForSeconds(0.1f);
 
         if (curHp > 0)
         {
-            mat.color = Color.white;
-            
+            foreach (MeshRenderer mesh in meshs)
+            {
+                mesh.material.color = Color.white;
+            }
+
 
             if (isGrenade)
             {
@@ -111,7 +119,6 @@ public class Enemy : MonoBehaviour
                 rb.freezeRotation = false;
                 rb.AddForce(reactVec * 20, ForceMode.Impulse);
                 rb.AddTorque(reactVec * 15,  ForceMode.Impulse);
-                
 
             }
 
@@ -119,57 +126,75 @@ public class Enemy : MonoBehaviour
             {
                 reactVec = reactVec.normalized;
                 reactVec += Vector3.up;
-                rb.AddForce(reactVec * 5, ForceMode.Impulse);
+                rb.AddForce(reactVec * 3, ForceMode.Impulse);
             }
         }
         else
         {
-            mat.color = Color.gray;
+            switch (enemyType)
+            {
+                case Type.A:
+                    manager.enemyCntA--;
+                    break;
+                case Type.B:
+                    manager.enemyCntB--;
+                    break;
+                case Type.C:
+                    manager.enemyCntC--;
+                    break;
+            }
+            foreach (MeshRenderer mesh in meshs)
+            {
+                mesh.material.color = Color.gray;
+            }
+            isDead = true;
             nav.enabled = false;
             gameObject.layer = 10;
             anim.SetTrigger("Die");
+
+            if (enemyType != Type.D)
             Destroy(gameObject, 1);
         }
     }
 
     void FreezeRotation()
     {
-
         
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-        
 
     }
 
     void Targeting()
     {
-        float targetRadius = 0f;
-        float targetRange = 0f;
-
-        switch (enemyType)
+        if (!isDead && enemyType != Type.D)
         {
-            case Type.A:
-                targetRadius = 1.5f;
-                targetRange = 3f;
-                break;
-            case Type.B:
-                targetRadius = 1.5f;
-                targetRange = 12f;
-                break;
-            case Type.C:
-                targetRadius = 0.5f;
-                targetRange = 25f;
-                break;
+            float targetRadius = 0f;
+            float targetRange = 0f;
+
+            switch (enemyType)
+            {
+                case Type.A:
+                    targetRadius = 1.5f;
+                    targetRange = 3f;
+                    break;
+                case Type.B:
+                    targetRadius = 0.1f;
+                    targetRange = 12f;
+                    break;
+                case Type.C:
+                    targetRadius = 0.5f;
+                    targetRange = 25f;
+                    break;
+            }
+
+            RaycastHit[] raycastHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
+
+            if (raycastHits.Length > 0 && !isAttack)
+            {
+                StartCoroutine(Attack());
+            }
         }
-
-        RaycastHit[] raycastHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
-
-        if (raycastHits.Length > 0 && !isAttack)
-        {
-            StartCoroutine(Attack());
-        }
-
     }
 
     IEnumerator Attack()
@@ -193,7 +218,7 @@ public class Enemy : MonoBehaviour
             case Type.B:
                 yield return new WaitForSeconds(0.1f);
                 meleeArea.enabled = true;
-                rb.AddForce(transform.forward* 20, ForceMode.Impulse);
+                rb.AddForce(transform.forward* 25, ForceMode.Impulse);
                 
                 yield return new WaitForSeconds(0.5f);
                 rb.velocity = Vector3.zero;

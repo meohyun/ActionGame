@@ -4960,7 +4960,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missileParticle: {fileID: 2745009826895910123}
   EffectObj: {fileID: 4542175610603159454}
-  meshRen: {fileID: 788622224881110711}
 --- !u!54 &7245036027328284250
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4989,8 +4988,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712197ae3701d4fa096ab62109c008ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 20
   isMelee: 0
+  isRock: 0
 --- !u!1001 &2970374760915131359
 PrefabInstance:
   m_ObjectHideFlags: 0

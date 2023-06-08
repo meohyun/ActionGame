@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public int Ammo;
     public int Coin;
     public int Heart;
+    public int score;
 
     public int MaxAmmo;
     public int MaxCoin;
@@ -37,6 +38,8 @@ public class Player : MonoBehaviour
     bool aDown;
     bool rDown;
     bool gDown;
+    bool backDown;
+    bool isShop;
 
     bool swapDown1;
     bool swapDown2;
@@ -59,7 +62,8 @@ public class Player : MonoBehaviour
 
     Animator anim;
     GameObject nearObject;
-    Weapon equipWeapon;
+    public Weapon equipWeapon;
+    public GameManager GM;
     MeshRenderer[] meshs;
 
 
@@ -69,6 +73,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
         meshs = GetComponentsInChildren<MeshRenderer>();
+
+        PlayerPrefs.SetInt("MaxScore", 1000000);
     }
 
     // Update is called once per frame
@@ -100,6 +106,7 @@ public class Player : MonoBehaviour
         aDown = Input.GetButton("Fire1");
         gDown = Input.GetButtonDown("Fire2");
         rDown = Input.GetButtonDown("Reload");
+        backDown = Input.GetButtonDown("back");
 
     }
 
@@ -117,11 +124,11 @@ public class Player : MonoBehaviour
             moveVec = Vector3.zero;
         }
 
-        transform.position += moveVec * moveSpeed *(sDown ? 0.3f : 1f) * Time.deltaTime;
+        transform.position += moveVec * moveSpeed * (sDown ? 0.3f : 1f) * Time.deltaTime;
 
-        anim.SetBool("isRun",moveVec!= Vector3.zero);
-        anim.SetBool("isWalk",sDown);
-        
+        anim.SetBool("isRun", moveVec != Vector3.zero);
+        anim.SetBool("isWalk", sDown);
+
     }
 
     void Turn()
@@ -140,13 +147,22 @@ public class Player : MonoBehaviour
                 transform.LookAt(transform.position + nextVec);
             }
         }
+        // 뒤돌 
+        if (backDown)
+        {
+            Quaternion rot_Y = Quaternion.Euler(0, 180, 0);
+
+            transform.rotation *= rot_Y;
+            transform.LookAt(transform.position);
+        }
+
     }
 
     void Jump()
     {
         if (jDown && moveVec == Vector3.zero && !isJump && !isDodge)
         {
-            
+
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             isJump = true;
             anim.SetBool("isJump", true);
@@ -156,18 +172,18 @@ public class Player : MonoBehaviour
 
     void Dodge()
     {
-        if (jDown && moveVec!= Vector3.zero && !isJump && !isDodge)
+        if (jDown && moveVec != Vector3.zero && !isJump && !isDodge)
         {
             dodgeVec = moveVec;
 
             moveSpeed *= 2;
             isDodge = true;
             anim.SetTrigger("doDodge");
-            
+
 
             Invoke("DodgeOut", 0.4f);
         }
-        
+
     }
 
     void DodgeOut()
@@ -179,16 +195,26 @@ public class Player : MonoBehaviour
     void Equip()
     {
 
-        if (eDown && nearObject != null && !isJump && nearObject.tag == "Weapon")
+        if (eDown && nearObject != null && !isJump)
         {
-           
-             Item item = nearObject.GetComponent<Item>();
-             int weaponIndex = item.value;
-             hasWeapon[weaponIndex] = true;
+            if (nearObject.tag == "Weapon")
+            {
+                Item item = nearObject.GetComponent<Item>();
+                int weaponIndex = item.value;
+                hasWeapon[weaponIndex] = true;
 
-             Destroy(nearObject);
-           
+                Destroy(nearObject);
+            }
+
+            else if (nearObject.tag == "Shop")
+            {
+                Shop shop = nearObject.GetComponent<Shop>();
+                shop.Enter(this);
+                isShop = true;
+            }
+
         }
+        
     }
 
     void Swap()
@@ -211,20 +237,20 @@ public class Player : MonoBehaviour
         if ((swapDown1 || swapDown2 || swapDown3) && !isJump && !isDodge && hasWeapon[weaponIndex])
         {
             anim.SetTrigger("doSwap");
-            
+
             isSwap = true;
 
             Invoke("SwapOut", 0.4f);
 
             equipWeaponIndex = weaponIndex;
 
-            if (equipWeapon!= null)
+            if (equipWeapon != null)
             {
                 equipWeapon.gameObject.SetActive(false);
             }
             equipWeapon = weapons[weaponIndex].GetComponent<Weapon>();
             equipWeapon.gameObject.SetActive(true);
-           
+
         }
 
     }
@@ -242,11 +268,11 @@ public class Player : MonoBehaviour
         fireDelay += Time.deltaTime;
         isFireReady = equipWeapon.attackSpeed < fireDelay;
 
-        if (aDown && isFireReady && !isDodge && !isSwap )
+        if (aDown && isFireReady && !isDodge && !isSwap && !isShop)
         {
             if (equipWeapon.type == Weapon.Type.Range && equipWeapon.curAmmo == 0)
-                return;   
-                
+                return;
+
             equipWeapon.Use();
             anim.SetTrigger(equipWeapon.type == Weapon.Type.Melee ? "doSwing" : "doShot");
 
@@ -271,8 +297,10 @@ public class Player : MonoBehaviour
             return;
         if (Ammo == 0)
             return;
+        if (equipWeapon.curAmmo == equipWeapon.maxAmmo)
+            return;
 
-        if (rDown && !isJump && !isDodge && !isSwap && isFireReady)
+        if (rDown && !isJump && !isDodge && !isSwap && isFireReady && !isShop)
         {
             isReload = true;
             anim.SetTrigger("doReload");
@@ -283,8 +311,8 @@ public class Player : MonoBehaviour
 
     void ReloadOut()
     {
-        int reAmmo = Ammo < equipWeapon.maxAmmo ? Ammo : equipWeapon.maxAmmo;
-        equipWeapon.curAmmo = reAmmo;
+        int reAmmo = Ammo < equipWeapon.maxAmmo ? Ammo : equipWeapon.maxAmmo-equipWeapon.curAmmo;
+        equipWeapon.curAmmo = equipWeapon.maxAmmo;
         Ammo -= reAmmo;
         isReload = false;
     }
@@ -306,7 +334,7 @@ public class Player : MonoBehaviour
 
             isDie = true;
             StartCoroutine(restart());
-            
+
         }
     }
 
@@ -317,7 +345,7 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("Stage_"+ GM.stage.ToString());
 
     }
 
@@ -326,7 +354,7 @@ public class Player : MonoBehaviour
         if (HasGrenades == 0)
             return;
 
-        if (gDown && !isJump && !isSwap)
+        if (gDown && !isJump && !isSwap && !isShop)
         {
             Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
@@ -345,22 +373,31 @@ public class Player : MonoBehaviour
                 grenades[HasGrenades].SetActive(false);
             }
 
-            
+
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Weapon")
+        if (other.tag == "Weapon" || other.tag =="Shop")
         {
             nearObject = other.gameObject;
         }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Weapon")
         {
+            nearObject = null;
+        }
+        else if (other.tag == "Shop")
+        {
+
+            Shop shop = nearObject.GetComponent<Shop>();
+            shop.Exit();
+            isShop = false;
             nearObject = null;
         }
     }
@@ -425,7 +462,8 @@ public class Player : MonoBehaviour
             {
                 Bullet enemyBullet = other.GetComponent<Bullet>();
                 Heart -= enemyBullet.damage;
-                StartCoroutine(onDamage());
+                bool isBossAtk = other.name == "Boss Melee Area";
+                StartCoroutine(onDamage(isBossAtk));
 
 
             }
@@ -433,7 +471,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator onDamage()
+    IEnumerator onDamage(bool isBossAtk)
     {
         isDamage = true;
 
@@ -442,6 +480,14 @@ public class Player : MonoBehaviour
             mesh.material.color = Color.yellow;
         }
         yield return new WaitForSeconds(1f);
+
+        if (isBossAtk)
+            rb.AddForce(transform.forward * -25 , ForceMode.Impulse);
+
+        yield return new WaitForSeconds(1f);
+
+        if (isBossAtk)
+            rb.velocity = Vector3.zero;
 
         isDamage = false;
         foreach (MeshRenderer mesh in meshs)

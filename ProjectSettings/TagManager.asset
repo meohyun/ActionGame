@@ -13,6 +13,10 @@ TagManager:
   - Enemy
   - EnemyBullet
   - Wall
+  - Shop
+  - NPC
+  - Portal
+  - Tree
   layers:
   - Default
   - TransparentFX
