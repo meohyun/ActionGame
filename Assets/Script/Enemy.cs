@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 
     public int curHp;
     public int maxHp;
+    public int score;
 
     public bool isChase;
     public bool isAttack;
@@ -20,6 +21,7 @@ public class Enemy : MonoBehaviour
     public BoxCollider meleeArea;
 
     public GameObject bullet;
+    public GameObject[] coins;
 
     public Rigidbody rb;
     public BoxCollider boxCollider;
@@ -41,6 +43,7 @@ public class Enemy : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         nav = GetComponent<NavMeshAgent>();
 
+        target = GameObject.Find("Player").transform;
 
         if (enemyType != Type.D)
             Invoke("startMove", 2f);
@@ -70,7 +73,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Melee")
+        if (other.tag == "Melee" && !isDead)
         {
             Weapon weapon = other.GetComponent<Weapon>();
             curHp -= weapon.damage;
@@ -78,7 +81,7 @@ public class Enemy : MonoBehaviour
             StartCoroutine(OnDamage(reactVec,false));
         }
 
-        else if (other.tag == "Bullet")
+        if (other.tag == "Bullet" && !isDead)
         {
             Bullet bullet = other.GetComponent<Bullet>();
             curHp -= bullet.damage;
@@ -129,8 +132,13 @@ public class Enemy : MonoBehaviour
                 rb.AddForce(reactVec * 3, ForceMode.Impulse);
             }
         }
-        else
+        else 
         {
+            gameObject.layer = 10;
+            isDead = true;
+            nav.enabled = false;
+            anim.SetTrigger("Die");
+
             switch (enemyType)
             {
                 case Type.A:
@@ -147,12 +155,13 @@ public class Enemy : MonoBehaviour
             {
                 mesh.material.color = Color.gray;
             }
-            isDead = true;
-            nav.enabled = false;
-            gameObject.layer = 10;
-            anim.SetTrigger("Die");
+            
 
-            if (enemyType != Type.D)
+            Player player = target.GetComponent<Player>();
+            player.score += score;
+            int ranCoin = Random.Range(0, 3);
+            Instantiate(coins[ranCoin], transform.position, Quaternion.identity);
+
             Destroy(gameObject, 1);
         }
     }

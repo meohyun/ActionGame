@@ -394,7 +394,6 @@ public class Player : MonoBehaviour
         }
         else if (other.tag == "Shop")
         {
-
             Shop shop = nearObject.GetComponent<Shop>();
             shop.Exit();
             isShop = false;

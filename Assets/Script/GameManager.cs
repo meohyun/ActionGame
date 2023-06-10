@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject menuCam;
     public GameObject gameCam;
-    public Player player;
+    Player player;
     public Boss boss;
     public int stage;
     public float playTime;
@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject menuPanel;
     public GameObject gamePanel;
+    public GameObject portal;
 
     public Text maxScoreTxt;
 
@@ -44,6 +45,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         maxScoreTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        
     }
 
     public void GameStart()
@@ -53,8 +56,6 @@ public class GameManager : MonoBehaviour
 
         menuPanel.SetActive(false);
         gamePanel.SetActive(true);
-
-        player.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -62,6 +63,11 @@ public class GameManager : MonoBehaviour
     {
         if (isFight)
             playTime += Time.deltaTime;
+
+        if (enemyCntA + enemyCntB + enemyCntC == 0)
+        {
+            portal.SetActive(true);
+        }
     }
 
     //update가 끝난후 실행
@@ -101,7 +107,6 @@ public class GameManager : MonoBehaviour
         bossHealthBar.localScale = new Vector3((float)boss.curHp / boss.maxHp, 1, 1);
 
     }
-
 
     
 }
