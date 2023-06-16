@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,7 +30,6 @@ public class Player : MonoBehaviour
 
     public Rigidbody rb;
 
-    bool wDown;
     bool sDown;
     bool jDown;
     bool eDown;
@@ -58,21 +54,24 @@ public class Player : MonoBehaviour
     float vAxis;
     float fireDelay;
 
-
     Vector3 moveVec;
     Vector3 dodgeVec;
 
     Animator anim;
     GameObject nearObject;
+    GameObject GM;
+
+    GameManager manager;
     public Weapon equipWeapon;
-    public GameManager GM;
+
+
     MeshRenderer[] meshs;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //transform.position = GM.startPosition;
+        
         rb = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
         meshs = GetComponentsInChildren<MeshRenderer>();
@@ -94,6 +93,13 @@ public class Player : MonoBehaviour
         Reload();
         Die();
         Grenade();
+    }
+
+    private void LateUpdate()
+    {
+        GM = GameObject.FindWithTag("Manager");
+        manager = GM.GetComponentInChildren<GameManager>();
+
     }
 
     void GetInput()
@@ -341,15 +347,24 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator restart()
+
+    // 목숨이 0개가 아니라면 다시 시작
+    public IEnumerator restart()
     {
         transform.gameObject.layer = 11;
         anim.SetTrigger("Die");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         if (Life != 0)
-            SceneManager.LoadScene("Stage_"+ GM.stage.ToString());
+
+            // 살아나는 위치 초기화 및 다시 씬 불러옴
+            transform.gameObject.layer = 3;
+            Health = 100;
+            isDie = false;
+            rb.velocity = Vector3.zero;
+            transform.position = new Vector3(0, 0, 0);
+            SceneManager.LoadScene("Stage_" + manager.stage.ToString());
 
     }
 
@@ -392,11 +407,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Weapon")
-        {
-            nearObject = null;
-        }
-        else if (other.tag == "Shop")
+        if (other.tag == "Shop")
         {
             Shop shop = nearObject.GetComponent<Shop>();
             shop.Exit();
@@ -408,7 +419,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name == "Floor")
+        if(collision.gameObject.tag == "Floor")
         {
             anim.SetBool("isJump", false);
             isJump = false;
@@ -416,11 +427,8 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.tag == "Enemy")
         {
-            Health -= 3;
-            Vector3 reactVec = (transform.position - collision.transform.position).normalized;
-            reactVec += Vector3.up;
-            rb.AddForce(reactVec * 10, ForceMode.Impulse);
-            rb.velocity = Vector3.zero;
+            Health -= 5;
+            StartCoroutine(onDamage(false));
         }
 
     }

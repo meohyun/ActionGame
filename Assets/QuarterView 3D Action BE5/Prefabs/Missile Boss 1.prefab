@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4503743142459178571}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -0, y: 5, z: 0}
+  m_LocalPosition: {x: -0, y: 3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -92,11 +92,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6219136924476673952}
+  - component: {fileID: 9150696994655796052}
   - component: {fileID: 7786118058326527892}
-  - component: {fileID: 7786118058326527893}
-  - component: {fileID: 7786118058326527889}
   - component: {fileID: 7786118058326527895}
   - component: {fileID: 7786118058326527899}
+  - component: {fileID: -7311026370807436153}
   m_Layer: 14
   m_Name: Missile Boss 1
   m_TagString: EnemyBullet
@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 6702764417165219098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9071367873387825555}
@@ -122,6 +122,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &9150696994655796052
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702764417165219098}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3, z: 4}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!54 &7786118058326527892
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -138,33 +151,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &7786118058326527893
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6702764417165219098}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.5, y: 2.5, z: 4}
-  m_Center: {x: 0, y: 5, z: 0}
---- !u!114 &7786118058326527889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6702764417165219098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bde0ffc77b82c4cef80304d60bfea431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  missileParticle: {fileID: 7786118058947692316}
-  EffectObj: {fileID: 8807969547782349764}
 --- !u!114 &7786118058326527895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,10 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f08f364f45d4b55aab3e56155a0209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
-  isMelee: 0
-  isRock: 0
-  isMissile: 1
   target: {fileID: 0}
   particle: {fileID: 7786118058947692316}
   explosionEffect: {fileID: 8807969547782349764}
@@ -206,6 +188,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-7311026370807436153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702764417165219098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712197ae3701d4fa096ab62109c008ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 15
+  isMelee: 0
+  isRock: 0
+  isMissile: 1
 --- !u!1 &7786118058947692316
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7786118058947692316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: -3}
+  m_LocalPosition: {x: 0, y: 3, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

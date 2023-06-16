@@ -33,7 +33,7 @@ public class Shop : MonoBehaviour
         uiGroup.anchoredPosition = Vector3.down * 1000;
     }
 
-    public void Buy(int index)
+    public void BuyWeapon(int index)
     {
 
         int price = itemPrices[index];
@@ -44,10 +44,29 @@ public class Shop : MonoBehaviour
             return;
 
         }
-   
+
         enterPlayer.Coin -= price;
         StopCoroutine(EnoughTalk());
         StartCoroutine(EnoughTalk());
+        enterPlayer.hasWeapon[index] = true;
+
+    }
+
+    public void BuyItems(int index)
+    {
+        int price = itemPrices[index];
+        if (price > enterPlayer.Coin)
+        {
+            StopCoroutine(notEnoughTalk());
+            StartCoroutine(notEnoughTalk());
+            return;
+
+        }
+
+        enterPlayer.Coin -= price;
+        StopCoroutine(EnoughTalk());
+        StartCoroutine(EnoughTalk());
+
         Vector3 ranVec = Vector3.forward * Random.Range(-3, 3) + Vector3.right * Random.Range(-3, 3);
         Instantiate(itemObjs[index], itemPos[index].position + ranVec, itemPos[index].rotation);
     }

@@ -17,6 +17,7 @@ TagManager:
   - NPC
   - Portal
   - Tree
+  - Manager
   layers:
   - Default
   - TransparentFX

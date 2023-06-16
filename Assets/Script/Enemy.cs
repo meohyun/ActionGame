@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public enum Type { A, B ,C ,D}
+    public enum Type { A, B ,C ,D , Turret}
     public Type enemyType;
 
     public int curHp;
@@ -40,17 +40,20 @@ public class Enemy : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
         meshs = GetComponentsInChildren<MeshRenderer>();
         anim = GetComponentInChildren<Animator>();
-        nav = GetComponent<NavMeshAgent>();
+
+        if (enemyType != Type.Turret)
+            nav = GetComponent<NavMeshAgent>();
 
         target = GameObject.Find("Player").transform;
 
-        if (enemyType != Type.D)
+        if (enemyType != Type.D &&  enemyType != Type.Turret)
             Invoke("startMove", 2f);
     }
 
     void Update()
-    { 
-        Move();
+    {
+        if (enemyType != Type.Turret)
+            Move();
     }
 
     void startMove()
@@ -65,14 +68,13 @@ public class Enemy : MonoBehaviour
         {
             nav.SetDestination(target.position);
             nav.isStopped = !isChase;
-
         }
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Melee" && !isDead)
+        if (other.tag == "Melee" && !isDead && enemyType != Type.Turret)
         {
             Weapon weapon = other.GetComponent<Weapon>();
             curHp -= weapon.damage;
@@ -80,7 +82,7 @@ public class Enemy : MonoBehaviour
             StartCoroutine(OnDamage(reactVec,false));
         }
 
-        if (other.tag == "Bullet" && !isDead)
+        if (other.tag == "Bullet" && !isDead && enemyType != Type.Turret)
         {
             Bullet bullet = other.GetComponent<Bullet>();
             curHp -= bullet.damage;
@@ -212,9 +214,10 @@ public class Enemy : MonoBehaviour
             RaycastHit[] raycastHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
 
             if (raycastHits.Length > 0 && !isAttack)
-            {
                 StartCoroutine(Attack());
-            }
+            
+            else if (!isAttack && enemyType == Type.Turret)
+                StartCoroutine(Attack());
         }
     }
 
@@ -256,7 +259,16 @@ public class Enemy : MonoBehaviour
 
                 yield return new WaitForSeconds(2f);
                 break;
-        }
+
+            case Type.Turret:
+                yield return new WaitForSeconds(0.7f);
+                GameObject instantMissile = Instantiate(bullet, transform.position, transform.rotation);
+                Rigidbody rigidMissile = instantMissile.GetComponent<Rigidbody>();
+                rigidMissile.velocity = transform.forward * 20;
+
+                yield return new WaitForSeconds(2f);
+                break;
+        }   
 
         isChase = true;
         isAttack = false;

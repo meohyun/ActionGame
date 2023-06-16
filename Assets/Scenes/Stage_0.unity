@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 36273189}
   m_Layer: 0
   m_Name: Game Manager
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -240,7 +240,7 @@ MonoBehaviour:
   menuCam: {fileID: 1105333989}
   gameCam: {fileID: 963194225}
   boss: {fileID: 0}
-  stage: 0
+  stage: 2
   playTime: 0
   isFight: 0
   enemyCntA: 0
@@ -267,7 +267,6 @@ MonoBehaviour:
   bossHealthGroup: {fileID: 485469356}
   bossHealthBar: {fileID: 1756427651}
   playerHealthBar: {fileID: 759605770}
-  startPosition: {x: 0, y: 0, z: -6}
 --- !u!4 &36273190
 Transform:
   m_ObjectHideFlags: 0
@@ -6019,37 +6018,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10653eccf6b69fd47938a227b4bf3863, type: 3}
---- !u!1 &266287491
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 266287492}
-  m_Layer: 0
-  m_Name: Spawn Pos C
-  m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &266287492
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266287491}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 0, z: -9.35}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 827829402}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &273884220
 GameObject:
   m_ObjectHideFlags: 0
@@ -8914,7 +8882,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1248127206}
         m_TargetAssemblyTypeName: Shop, Assembly-CSharp
-        m_MethodName: Buy
+        m_MethodName: BuyWeapon
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9387,9 +9355,6 @@ Transform:
   - {fileID: 178449619}
   - {fileID: 1015141135}
   - {fileID: 1248127201}
-  - {fileID: 1188800455}
-  - {fileID: 1731868146}
-  - {fileID: 266287492}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 40, z: 0}
@@ -14281,10 +14246,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2409240896083652546, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2409240896083652548, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 36273189}
+      objectReference: {fileID: 0}
     - target: {fileID: 2409240896083652548, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: Life
       value: 5
@@ -14293,6 +14262,10 @@ PrefabInstance:
       propertyPath: Health
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 2409240896083652548, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 36273189}
     - target: {fileID: 2409240896083652548, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: MaxHealth
       value: 100
@@ -14377,7 +14350,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2409240896083652600, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
 --- !u!1 &874653967 stripped
 GameObject:
@@ -25041,7 +25015,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1248127206}
         m_TargetAssemblyTypeName: Shop, Assembly-CSharp
-        m_MethodName: Buy
+        m_MethodName: BuyWeapon
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25427,37 +25401,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 437ad4dccfddbb64b9b2bb88be07abe4, type: 3}
---- !u!1 &1188800454
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1188800455}
-  m_Layer: 0
-  m_Name: Spawn Pos A
-  m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1188800455
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1188800454}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: -9.35}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 827829402}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1189481608 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1447104275903941039, guid: cd8e3c00b0f28f0419943b46a579c6fc, type: 3}
@@ -30578,9 +30521,9 @@ MonoBehaviour:
   - {fileID: 7169356510410262009, guid: 8616f27e4a67442f5b658dcdde72346f, type: 3}
   itemPrices: f4010000b80b000088130000
   itemPos:
-  - {fileID: 1188800455}
-  - {fileID: 1731868146}
-  - {fileID: 266287492}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   talktext: {fileID: 1531473445}
   talkData:
   - "\uAC15\uB825\uD55C \uBB34\uAE30\uAC00 \uBC14\uB85C \uC2B9\uB9AC\uC758 \uC9C0\uB984\uAE38\uC774\uC9C0!"
@@ -30976,7 +30919,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1248127206}
         m_TargetAssemblyTypeName: Shop, Assembly-CSharp
-        m_MethodName: Buy
+        m_MethodName: BuyWeapon
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -31452,7 +31395,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 839682095}
         m_TargetAssemblyTypeName: Shop, Assembly-CSharp
-        m_MethodName: Buy
+        m_MethodName: BuyItems
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -31528,6 +31471,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 205007807421100328, guid: 437ad4dccfddbb64b9b2bb88be07abe4, type: 3}
   m_PrefabInstance: {fileID: 501289592}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1447747936 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7685068705529807443, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
+  m_PrefabInstance: {fileID: 865790870}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1447747942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447747936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8d98218218949f8a755c50c3fa393c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1462161291 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 205007807421100328, guid: 437ad4dccfddbb64b9b2bb88be07abe4, type: 3}
@@ -37517,37 +37477,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722428523}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1731868145
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1731868146}
-  m_Layer: 0
-  m_Name: Spawn Pos B
-  m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1731868146
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1731868145}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 0, z: -9.35}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 827829402}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1735632606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8018429946725390617, guid: 10653eccf6b69fd47938a227b4bf3863, type: 3}
@@ -38071,7 +38000,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 839682095}
         m_TargetAssemblyTypeName: Shop, Assembly-CSharp
-        m_MethodName: Buy
+        m_MethodName: BuyItems
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -44521,7 +44450,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 839682095}
         m_TargetAssemblyTypeName: Shop, Assembly-CSharp
-        m_MethodName: Buy
+        m_MethodName: BuyItems
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

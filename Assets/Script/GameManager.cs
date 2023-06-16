@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,7 +45,6 @@ public class GameManager : MonoBehaviour
 
     public RectTransform playerHealthBar;
 
-    public Vector3 startPosition = new Vector3(0, 0, -6);
 
     // Start is called before the first frame update
     void Start()

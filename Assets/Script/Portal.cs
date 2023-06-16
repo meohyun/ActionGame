@@ -23,6 +23,9 @@ public class Portal : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            Player player = other.gameObject.GetComponent<Player>();
+            player.transform.position = new Vector3(0, 0, 0);
+
             SceneManager.LoadScene("Stage_" + (manager.stage + 1).ToString());
         }
     }
