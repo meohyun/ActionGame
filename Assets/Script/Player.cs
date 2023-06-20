@@ -357,14 +357,18 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         if (Life != 0)
-
+        {
             // 살아나는 위치 초기화 및 다시 씬 불러옴
             transform.gameObject.layer = 3;
             Health = 100;
+            Ammo = 300;
+            if (equipWeapon != null)
+                equipWeapon.curAmmo = equipWeapon.maxAmmo;
             isDie = false;
             rb.velocity = Vector3.zero;
             transform.position = new Vector3(0, 0, 0);
             SceneManager.LoadScene("Stage_" + manager.stage.ToString());
+        }      
 
     }
 

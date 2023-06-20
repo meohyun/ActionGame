@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public enum Type { A, B ,C ,D , Turret}
+    public enum Type { A, B ,C ,D, Boss , Turret}
     public Type enemyType;
 
     public int curHp;
@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject bullet;
     public GameObject[] coins;
+    public GameObject explosionEffect;
 
     public Rigidbody rb;
     public BoxCollider boxCollider;
@@ -46,7 +47,7 @@ public class Enemy : MonoBehaviour
 
         target = GameObject.Find("Player").transform;
 
-        if (enemyType != Type.D &&  enemyType != Type.Turret)
+        if (enemyType != Type.Boss && enemyType != Type.Turret)
             Invoke("startMove", 2f);
     }
 
@@ -64,7 +65,7 @@ public class Enemy : MonoBehaviour
 
     void Move()
     { 
-        if (nav.enabled && enemyType != Type.D)
+        if (nav.enabled && enemyType != Type.Boss)
         {
             nav.SetDestination(target.position);
             nav.isStopped = !isChase;
@@ -151,6 +152,10 @@ public class Enemy : MonoBehaviour
                 case Type.C:
                     manager.enemyCntC--;
                     break;
+                case Type.D:
+                    manager.enemyCntD--;
+                    break;
+
             }
             foreach (MeshRenderer mesh in meshs)
             {
@@ -162,7 +167,7 @@ public class Enemy : MonoBehaviour
             player.score += score;
             int ranCoin = Random.Range(0, 3);
 
-            if (enemyType == Type.D)
+            if (enemyType == Type.Boss)
             {
                 for (int i = 0; i < 3;i++)
                 {
@@ -190,7 +195,7 @@ public class Enemy : MonoBehaviour
 
     void Targeting()
     {
-        if (!isDead && enemyType != Type.D)
+        if (!isDead && enemyType != Type.Boss)
         {
             float targetRadius = 0f;
             float targetRange = 0f;
@@ -208,6 +213,10 @@ public class Enemy : MonoBehaviour
                 case Type.C:
                     targetRadius = 0.5f;
                     targetRange = 25f;
+                    break;
+                case Type.D:
+                    targetRadius = 1.5f;
+                    targetRange = 3f;
                     break;
             }
 
@@ -260,6 +269,29 @@ public class Enemy : MonoBehaviour
                 yield return new WaitForSeconds(2f);
                 break;
 
+            case Type.D:
+
+                foreach (MeshRenderer mesh in meshs)
+                {
+                    mesh.material.color = Color.red;
+                }
+                gameObject.layer = 10;
+                isDead = true;
+                nav.enabled = false;
+
+                yield return new WaitForSeconds(0.2f);
+                explosionEffect.SetActive(true);
+                meleeArea.enabled = true;
+
+                yield return new WaitForSeconds(1f);
+                explosionEffect.SetActive(false);
+                meleeArea.enabled = false;
+                Destroy(gameObject);
+                manager.enemyCntD--;
+
+                yield return new WaitForSeconds(1f);
+                break;
+
             case Type.Turret:
                 yield return new WaitForSeconds(0.7f);
                 GameObject instantMissile = Instantiate(bullet, transform.position, transform.rotation);
@@ -272,6 +304,7 @@ public class Enemy : MonoBehaviour
 
         isChase = true;
         isAttack = false;
+
         anim.SetBool("isAttack", false);
 
 

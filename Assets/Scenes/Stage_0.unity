@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 7a37f24ce5bc3448ea52ec55b95bc776, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: e61ba4d74f69e407591dfb2baa90cc37, type: 2}
 --- !u!1 &1148273
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,12 +240,13 @@ MonoBehaviour:
   menuCam: {fileID: 1105333989}
   gameCam: {fileID: 963194225}
   boss: {fileID: 0}
-  stage: 2
+  stage: 3
   playTime: 0
   isFight: 0
   enemyCntA: 0
   enemyCntB: 0
   enemyCntC: 0
+  enemyCntD: 0
   menuPanel: {fileID: 1148273}
   gamePanel: {fileID: 1192698947}
   portal: {fileID: 930615977}
