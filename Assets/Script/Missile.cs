@@ -30,7 +30,7 @@ public class Missile : MonoBehaviour
             StartCoroutine(MissileHit());
         }
 
-        if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Tree")
+        if (other.gameObject.tag == "WorldObject")
         {
             StartCoroutine(MissileHit());
         }

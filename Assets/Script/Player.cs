@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     bool gDown;
     bool backDown;
     bool isShop;
+    bool isBorder;
 
     bool swapDown1;
     bool swapDown2;
@@ -133,7 +134,8 @@ public class Player : MonoBehaviour
             moveVec = Vector3.zero;
         }
 
-        transform.position += moveVec * moveSpeed * (isReload ? 0.5f :(sDown ? 0.3f : 1f))* Time.deltaTime;
+        if (!isBorder)
+            transform.position += moveVec * moveSpeed * (isReload ? 0.5f :(sDown ? 0.3f : 1f))* Time.deltaTime;
 
         anim.SetBool("isRun", moveVec != Vector3.zero);
         anim.SetBool("isWalk", sDown);
@@ -181,7 +183,7 @@ public class Player : MonoBehaviour
 
     void Dodge()
     {
-        if (jDown && moveVec != Vector3.zero && !isJump && !isDodge)
+        if (jDown && moveVec != Vector3.zero && !isJump && !isDodge && !isReload)
         {
             dodgeVec = moveVec;
 
@@ -334,6 +336,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         FreezeRotation();
+        stopToWall();
     }
 
     void Die()
@@ -400,6 +403,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    void stopToWall()
+    {
+        isBorder = Physics.Raycast(transform.position, transform.forward,1,LayerMask.GetMask("GameObject"));
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Weapon" || other.tag =="Shop")
@@ -434,6 +442,9 @@ public class Player : MonoBehaviour
             Health -= 5;
             StartCoroutine(onDamage(false));
         }
+
+        if (collision.gameObject.tag == "WorldObject")
+            rb.velocity = Vector3.zero;
 
     }
 

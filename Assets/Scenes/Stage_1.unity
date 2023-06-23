@@ -371,8 +371,12 @@ PrefabInstance:
       value: Fir_Tree (2)
       objectReference: {fileID: 0}
     - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_TagString
-      value: Tree
+      value: WorldObject
       objectReference: {fileID: 0}
     - target: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_RootOrder
@@ -958,8 +962,12 @@ PrefabInstance:
       value: Fir_Tree (5)
       objectReference: {fileID: 0}
     - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_TagString
-      value: Tree
+      value: WorldObject
       objectReference: {fileID: 0}
     - target: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_RootOrder
@@ -1711,8 +1719,12 @@ PrefabInstance:
       value: Fir_Tree (9)
       objectReference: {fileID: 0}
     - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_TagString
-      value: Tree
+      value: WorldObject
       objectReference: {fileID: 0}
     - target: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_RootOrder
@@ -3012,8 +3024,12 @@ PrefabInstance:
       value: Fir_Tree
       objectReference: {fileID: 0}
     - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_TagString
-      value: Tree
+      value: WorldObject
       objectReference: {fileID: 0}
     - target: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_RootOrder
@@ -4436,8 +4452,12 @@ PrefabInstance:
       value: Fir_Tree (4)
       objectReference: {fileID: 0}
     - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_TagString
-      value: Tree
+      value: WorldObject
       objectReference: {fileID: 0}
     - target: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_RootOrder
@@ -4550,9 +4570,9 @@ GameObject:
   - component: {fileID: 974492335}
   - component: {fileID: 974492334}
   - component: {fileID: 974492333}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Wall (1)
-  m_TagString: Wall
+  m_TagString: WorldObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -4663,8 +4683,12 @@ PrefabInstance:
       value: Fir_Tree (8)
       objectReference: {fileID: 0}
     - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_TagString
-      value: Tree
+      value: WorldObject
       objectReference: {fileID: 0}
     - target: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_RootOrder
@@ -4892,8 +4916,12 @@ PrefabInstance:
       value: Fir_Tree (7)
       objectReference: {fileID: 0}
     - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_TagString
-      value: Tree
+      value: WorldObject
       objectReference: {fileID: 0}
     - target: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_RootOrder
@@ -5324,8 +5352,12 @@ PrefabInstance:
       value: Fir_Tree (6)
       objectReference: {fileID: 0}
     - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_TagString
-      value: Tree
+      value: WorldObject
       objectReference: {fileID: 0}
     - target: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_RootOrder
@@ -5437,8 +5469,12 @@ PrefabInstance:
       value: Fir_Tree (10)
       objectReference: {fileID: 0}
     - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_TagString
-      value: Tree
+      value: WorldObject
       objectReference: {fileID: 0}
     - target: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_RootOrder
@@ -12197,7 +12233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1570252765}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: WorldObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12816,9 +12852,9 @@ GameObject:
   - component: {fileID: 1722428527}
   - component: {fileID: 1722428526}
   - component: {fileID: 1722428525}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Wall
-  m_TagString: Wall
+  m_TagString: WorldObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -12929,8 +12965,12 @@ PrefabInstance:
       value: Fir_Tree (11)
       objectReference: {fileID: 0}
     - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_TagString
-      value: Tree
+      value: WorldObject
       objectReference: {fileID: 0}
     - target: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_RootOrder
@@ -13238,7 +13278,7 @@ GameObject:
   - component: {fileID: 1772376614}
   - component: {fileID: 1772376613}
   - component: {fileID: 1772376617}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -13659,9 +13699,9 @@ GameObject:
   - component: {fileID: 1859546030}
   - component: {fileID: 1859546029}
   - component: {fileID: 1859546028}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Wall (2)
-  m_TagString: Wall
+  m_TagString: WorldObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -15087,8 +15127,12 @@ PrefabInstance:
       value: Fir_Tree (3)
       objectReference: {fileID: 0}
     - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_TagString
-      value: Tree
+      value: WorldObject
       objectReference: {fileID: 0}
     - target: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_RootOrder
@@ -15200,8 +15244,12 @@ PrefabInstance:
       value: Fir_Tree (1)
       objectReference: {fileID: 0}
     - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_TagString
-      value: Tree
+      value: WorldObject
       objectReference: {fileID: 0}
     - target: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
       propertyPath: m_RootOrder
@@ -15314,9 +15362,9 @@ GameObject:
   - component: {fileID: 2108748989}
   - component: {fileID: 2108748988}
   - component: {fileID: 2108748987}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Wall
-  m_TagString: Wall
+  m_TagString: WorldObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

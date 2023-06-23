@@ -9,6 +9,11 @@ public class Boss : Enemy
     public Transform missilePortA;
     public Transform missilePortB;
 
+    GameObject instantMissileA;
+    GameObject instantMissileB;
+    GameObject instantcRock;
+
+
     // 플레이어 경로 예측
     Vector3 lookVec;
     Vector3 tauntVec;
@@ -33,8 +38,13 @@ public class Boss : Enemy
     // Update is called once per frame
     void Update()
     {
+        // 보스가 죽었을때 미사일,바위 제
         if (isDead)
         {
+            Destroy(instantMissileA);
+            Destroy(instantMissileB);
+            Destroy(instantcRock);
+            boxCollider.enabled = false;
             StopAllCoroutines();
             return;
         }
@@ -65,8 +75,7 @@ public class Boss : Enemy
             case 1:
                 StartCoroutine(MissileShot());
                 break;
-            case 2:
-       
+            case 2:       
             case 3:
                 StartCoroutine(RockShot());
                 break;
@@ -80,13 +89,13 @@ public class Boss : Enemy
     {
         anim.SetTrigger("doShot");
         yield return new WaitForSeconds(0.2f);
-        GameObject instatncMissileA = Instantiate(missile, missilePortA.position, missilePortA.rotation);
-        BossMissile bossMissileA = instatncMissileA.GetComponent<BossMissile>();
+        instantMissileA = Instantiate(missile, missilePortA.position, missilePortA.rotation);
+        BossMissile bossMissileA = instantMissileA.GetComponent<BossMissile>();
         bossMissileA.target = target;
 
         yield return new WaitForSeconds(0.3f);
-        GameObject instatncMissileB = Instantiate(missile, missilePortB.position, missilePortB.rotation);
-        BossMissile bossMissileB = instatncMissileB.GetComponent<BossMissile>();
+        instantMissileB = Instantiate(missile, missilePortB.position, missilePortB.rotation);
+        BossMissile bossMissileB = instantMissileB.GetComponent<BossMissile>();
         bossMissileB.target = target;
 
         yield return new WaitForSeconds(2f);
@@ -96,7 +105,7 @@ public class Boss : Enemy
     {
         isLook = false;
         anim.SetTrigger("doBigShot");
-        Instantiate(bullet, transform.position, transform.rotation);
+        instantcRock = Instantiate(bullet, transform.position, transform.rotation);
 
 
         yield return new WaitForSeconds(3f);

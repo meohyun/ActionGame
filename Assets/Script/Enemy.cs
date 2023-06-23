@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     public GameObject bullet;
     public GameObject[] coins;
     public GameObject explosionEffect;
+    GameObject instantBullet;
 
     public Rigidbody rb;
     public BoxCollider boxCollider;
@@ -100,7 +101,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(OnDamage(reactVec,true));
     }
 
-    IEnumerator OnDamage(Vector3 reactVec,bool isGrenade)
+    IEnumerator OnDamage(Vector3 reactVec, bool isGrenade)
     {
 
         foreach (MeshRenderer mesh in meshs)
@@ -123,7 +124,7 @@ public class Enemy : MonoBehaviour
                 reactVec += Vector3.up * 20;
                 rb.freezeRotation = false;
                 rb.AddForce(reactVec * 20, ForceMode.Impulse);
-                rb.AddTorque(reactVec * 15,  ForceMode.Impulse);
+                rb.AddTorque(reactVec * 15, ForceMode.Impulse);
 
             }
 
@@ -134,7 +135,7 @@ public class Enemy : MonoBehaviour
                 rb.AddForce(reactVec * 3, ForceMode.Impulse);
             }
         }
-        else 
+        else
         {
             gameObject.layer = 10;
             isDead = true;
@@ -150,6 +151,7 @@ public class Enemy : MonoBehaviour
                     manager.enemyCntB--;
                     break;
                 case Type.C:
+                    Destroy(instantBullet);
                     manager.enemyCntC--;
                     break;
                 case Type.D:
@@ -161,7 +163,7 @@ public class Enemy : MonoBehaviour
             {
                 mesh.material.color = Color.gray;
             }
-            
+
 
             Player player = target.GetComponent<Player>();
             player.score += score;
@@ -169,10 +171,10 @@ public class Enemy : MonoBehaviour
 
             if (enemyType == Type.Boss)
             {
-                for (int i = 0; i < 3;i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    Vector3 ranVec = Vector3.forward * Random.Range(-i+1,i+1) + Vector3.right * Random.Range(-i+1, i+1);
-                    Instantiate(coins[i],transform.position + ranVec, Quaternion.identity);
+                    Vector3 ranVec = Vector3.forward * Random.Range(-i + 1, i + 1) + Vector3.right * Random.Range(-i + 1, i + 1);
+                    Instantiate(coins[i], transform.position + ranVec, Quaternion.identity);
                 }
             }
             else
@@ -184,6 +186,7 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject, 1);
         }
     }
+
 
     void FreezeRotation()
     {
@@ -262,7 +265,7 @@ public class Enemy : MonoBehaviour
 
             case Type.C:
                 yield return new WaitForSeconds(0.7f);
-                GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
+                instantBullet = Instantiate(bullet, transform.position, transform.rotation);
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
                 rigidBullet.velocity = transform.forward * 20;
 
@@ -284,8 +287,6 @@ public class Enemy : MonoBehaviour
                 meleeArea.enabled = true;
 
                 yield return new WaitForSeconds(1f);
-                explosionEffect.SetActive(false);
-                meleeArea.enabled = false;
                 Destroy(gameObject);
                 manager.enemyCntD--;
 

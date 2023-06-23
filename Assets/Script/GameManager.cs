@@ -20,13 +20,14 @@ public class GameManager : MonoBehaviour
 
     public GameObject menuPanel;
     public GameObject gamePanel;
+    public GameObject clearPanel;
     public GameObject portal;
 
     public Text maxScoreTxt;
-
     public Text scoreTxt;
     public Text stageTxt;
     public Text playTimeTxt;
+    public Text finalScoreTxt;
 
     public Text playerLifeTxt;
     public Text playerHealthTxt;
@@ -125,6 +126,24 @@ public class GameManager : MonoBehaviour
             bossHealthGroup.anchoredPosition = Vector3.up * 200;
         }
 
+        // GameClear
+
+        if (stage == 4 && boss == null && enemyCntC == 0)
+        {
+            gamePanel.SetActive(false);
+            clearPanel.SetActive(true);
+            finalScoreTxt.text = "Point: " + scoreTxt.text;
+        }
+
+    }
+
+    public void reStart()
+    {
+
+        clearPanel.SetActive(false);
+        gamePanel.SetActive(true);
+
+        SceneManager.LoadScene("Stage_0");
     }
 
     

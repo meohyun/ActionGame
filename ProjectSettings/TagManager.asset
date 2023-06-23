@@ -12,12 +12,12 @@ TagManager:
   - Bullet
   - Enemy
   - EnemyBullet
-  - Wall
   - Shop
   - NPC
   - Portal
-  - Tree
   - Manager
+  - WorldObject
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -34,7 +34,7 @@ TagManager:
   - Item
   - Grenade
   - EnemyBullet
-  - 
+  - GameObject
   - 
   - 
   - 
