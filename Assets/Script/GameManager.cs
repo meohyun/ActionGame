@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int enemyCntB;
     public int enemyCntC;
     public int enemyCntD;
+    public int enemyCntE;
 
     public GameObject menuPanel;
     public GameObject gamePanel;
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour
             playTime += Time.deltaTime;
 
 
-        if (enemyCntA + enemyCntB + enemyCntC + enemyCntD == 0 && portal != null)
+        if (enemyCntA + enemyCntB + enemyCntC + enemyCntD + enemyCntE== 0 && portal != null)
         {
             portal.SetActive(true);
         }

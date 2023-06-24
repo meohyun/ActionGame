@@ -240,20 +240,23 @@ MonoBehaviour:
   menuCam: {fileID: 1105333989}
   gameCam: {fileID: 963194225}
   boss: {fileID: 0}
-  stage: 3
+  stage: 0
   playTime: 0
   isFight: 0
   enemyCntA: 0
   enemyCntB: 0
   enemyCntC: 0
   enemyCntD: 0
+  enemyCntE: 0
   menuPanel: {fileID: 1148273}
   gamePanel: {fileID: 1192698947}
+  clearPanel: {fileID: 0}
   portal: {fileID: 930615977}
   maxScoreTxt: {fileID: 2067902288}
   scoreTxt: {fileID: 802892684}
   stageTxt: {fileID: 644706120}
   playTimeTxt: {fileID: 1930785591}
+  finalScoreTxt: {fileID: 0}
   playerLifeTxt: {fileID: 599409084}
   playerHealthTxt: {fileID: 129179637}
   playerAmmoTxt: {fileID: 2025392794}

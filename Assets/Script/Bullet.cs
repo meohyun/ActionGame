@@ -9,6 +9,12 @@ public class Bullet : MonoBehaviour
     public bool isRock;
     public bool isMissile;
 
+    void Start()
+    {
+        StartCoroutine(selfDestory());
+    }
+
+
     private void OnCollisionEnter(Collision collision)
     {
         if (!isRock && collision.gameObject.tag == "Floor")
@@ -30,6 +36,17 @@ public class Bullet : MonoBehaviour
             Player player = other.GetComponent<Player>();
             player.Health -= damage;
         }
+
+        // Enemy E의 총알 사라
+        if (!isMissile && other.gameObject.tag == "Player")
+            Destroy(gameObject);
+    }
+
+
+    IEnumerator selfDestory()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
     }
 
 }

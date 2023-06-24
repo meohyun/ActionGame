@@ -242,13 +242,16 @@ MonoBehaviour:
   enemyCntB: 0
   enemyCntC: 0
   enemyCntD: 0
+  enemyCntE: 0
   menuPanel: {fileID: 1148273}
   gamePanel: {fileID: 1192698947}
+  clearPanel: {fileID: 0}
   portal: {fileID: 1409716999}
   maxScoreTxt: {fileID: 2067902288}
   scoreTxt: {fileID: 802892684}
   stageTxt: {fileID: 644706120}
   playTimeTxt: {fileID: 1930785591}
+  finalScoreTxt: {fileID: 0}
   playerLifeTxt: {fileID: 2133990930}
   playerHealthTxt: {fileID: 485585300}
   playerAmmoTxt: {fileID: 1648269083}
@@ -1860,6 +1863,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 36273189}
     - target: {fileID: 270227204, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 433887772}
+    - target: {fileID: 270227204, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
       propertyPath: coins.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -1982,6 +1989,11 @@ Animator:
 --- !u!4 &433887771 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4462523135328065168, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
+  m_PrefabInstance: {fileID: 433887768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &433887772 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 270227206, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
   m_PrefabInstance: {fileID: 433887768}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &475831145
@@ -2429,6 +2441,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 36273189}
     - target: {fileID: 270227204, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 563324539}
+    - target: {fileID: 270227204, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
       propertyPath: coins.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -2546,6 +2562,11 @@ NavMeshAgent:
 --- !u!4 &563324538 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4462523135328065168, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
+  m_PrefabInstance: {fileID: 563324536}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &563324539 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 270227206, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
   m_PrefabInstance: {fileID: 563324536}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &601554727
@@ -3852,6 +3873,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 36273189}
     - target: {fileID: 270227204, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 879935374}
+    - target: {fileID: 270227204, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
       propertyPath: coins.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -3974,6 +3999,11 @@ Animator:
 --- !u!4 &879935373 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4462523135328065168, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
+  m_PrefabInstance: {fileID: 879935370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &879935374 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 270227206, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
   m_PrefabInstance: {fileID: 879935370}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &889369316
@@ -12027,6 +12057,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 36273189}
     - target: {fileID: 270227204, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 1535469996}
+    - target: {fileID: 270227204, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
       propertyPath: coins.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -12144,6 +12178,11 @@ NavMeshAgent:
 --- !u!4 &1535469995 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4462523135328065168, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
+  m_PrefabInstance: {fileID: 1535469993}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1535469996 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 270227206, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
   m_PrefabInstance: {fileID: 1535469993}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1540683640
@@ -14462,6 +14501,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 36273189}
     - target: {fileID: 270227204, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 2006889582}
+    - target: {fileID: 270227204, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
       propertyPath: coins.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -14584,6 +14627,11 @@ Animator:
 --- !u!4 &2006889581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4462523135328065168, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
+  m_PrefabInstance: {fileID: 2006889578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2006889582 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 270227206, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
   m_PrefabInstance: {fileID: 2006889578}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2019685553

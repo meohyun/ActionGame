@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public enum Type { A, B ,C ,D, Boss , Turret}
+    public enum Type { A, B ,C ,D, E, Boss , Turret}
     public Type enemyType;
 
     public int curHp;
@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     public bool isDead;
 
     public Transform target;
+    public Transform EnemyEbulletPos;
 
     public BoxCollider meleeArea;
 
@@ -50,6 +51,7 @@ public class Enemy : MonoBehaviour
 
         if (enemyType != Type.Boss && enemyType != Type.Turret)
             Invoke("startMove", 2f);
+        
     }
 
     void Update()
@@ -157,6 +159,9 @@ public class Enemy : MonoBehaviour
                 case Type.D:
                     manager.enemyCntD--;
                     break;
+                case Type.E:
+                    manager.enemyCntE--;
+                    break;
 
             }
             foreach (MeshRenderer mesh in meshs)
@@ -220,6 +225,10 @@ public class Enemy : MonoBehaviour
                 case Type.D:
                     targetRadius = 1.5f;
                     targetRange = 3f;
+                    break;
+                case Type.E:
+                    targetRadius = 1.5f;
+                    targetRange = 15f;
                     break;
             }
 
@@ -300,6 +309,15 @@ public class Enemy : MonoBehaviour
                 rigidMissile.velocity = transform.forward * 20;
 
                 yield return new WaitForSeconds(2f);
+                break;
+            case Type.E:
+                yield return new WaitForSeconds(0.7f);
+                instantBullet = Instantiate(bullet, EnemyEbulletPos.position, EnemyEbulletPos.rotation);
+                Rigidbody rigid = instantBullet.GetComponent<Rigidbody>();
+                rigid.velocity = EnemyEbulletPos.forward * 50;
+
+                yield return new WaitForSeconds(1f);
+
                 break;
         }   
 
