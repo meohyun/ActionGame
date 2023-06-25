@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public GameObject grenadeObject;
     public int HasGrenades;
     public Camera followCamera;
+    public bool isRestart;
 
 
     public int Ammo;
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour
     bool isJump;
     bool isDodge;
     bool isSwap;
-    bool isFireReady = true;
+    public bool isFireReady = true;
     bool isReload;
     bool isDie;
     bool isDamage;
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour
     Vector3 moveVec;
     Vector3 dodgeVec;
 
-    Animator anim;
+    public Animator anim;
     GameObject nearObject;
     GameObject GM;
 
@@ -77,7 +78,7 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         meshs = GetComponentsInChildren<MeshRenderer>();
 
-        PlayerPrefs.SetInt("MaxScore", 1000000);
+        
     }
 
     // Update is called once per frame
@@ -341,12 +342,18 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        if (Health <= 0 && !isDie)
+        if (Health <= 0 && !isDie && Life > 0)
         {
             isDie = true;
             Life -= 1;
             StartCoroutine(restart());
 
+        }
+
+        else if (Health <=0 && !isDie && Life ==0)
+        {
+            isDie = true;
+            StartCoroutine(manager.GameOver());
         }
     }
 
@@ -443,6 +450,7 @@ public class Player : MonoBehaviour
             StartCoroutine(onDamage(false));
         }
 
+
         if (collision.gameObject.tag == "WorldObject")
             rb.velocity = Vector3.zero;
 
@@ -480,7 +488,7 @@ public class Player : MonoBehaviour
             }
             
         }
-        else if (other.tag== "EnemyBullet")
+        if (other.tag== "EnemyBullet")
         {
             if (!isDamage)
             {
@@ -491,6 +499,10 @@ public class Player : MonoBehaviour
             }
             
         }
+        
+
+
+
     }
 
     IEnumerator onDamage(bool isBossAtk)

@@ -60,6 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   isMelee: 0
+  isRock: 0
+  isMissile: 0
 --- !u!1 &328409505970683906
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,11 +143,22 @@ MonoBehaviour:
   enemyType: 0
   curHp: 30
   maxHp: 30
+  score: 50
   isChase: 0
   isAttack: 0
+  isDead: 0
   target: {fileID: 0}
+  EnemyEbulletPos: {fileID: 0}
   meleeArea: {fileID: 1367840146}
   bullet: {fileID: 0}
+  coins: []
+  explosionEffect: {fileID: 0}
+  rb: {fileID: 0}
+  boxCollider: {fileID: 0}
+  meshs: []
+  anim: {fileID: 0}
+  nav: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!195 &270227205
 NavMeshAgent:
   m_ObjectHideFlags: 0

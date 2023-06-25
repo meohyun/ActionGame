@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject menuPanel;
     public GameObject gamePanel;
     public GameObject clearPanel;
+    public GameObject gameOverPanel;
     public GameObject portal;
 
     public Text maxScoreTxt;
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         maxScoreTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
@@ -60,7 +62,9 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         menuCam.SetActive(false);
-        gameCam.SetActive(true);
+
+        if (!player.isRestart)
+            gameCam.SetActive(true);
 
         menuPanel.SetActive(false);
         gamePanel.SetActive(true);
@@ -129,7 +133,7 @@ public class GameManager : MonoBehaviour
 
         // GameClear
 
-        if (stage == 4 && boss == null && enemyCntC == 0)
+        if (stage == 4 && boss == null && enemyCntA + enemyCntB + enemyCntC + enemyCntD + enemyCntE == 0)
         {
             gamePanel.SetActive(false);
             clearPanel.SetActive(true);
@@ -140,12 +144,57 @@ public class GameManager : MonoBehaviour
 
     public void reStart()
     {
+        int maxScore = PlayerPrefs.GetInt("MaxScore");
 
+        if (player.score > maxScore)
+        {
+            PlayerPrefs.SetInt("MaxScore", player.score);
+        }
+
+        player.isRestart = true;
+        
+        player.transform.position = new Vector3(0, 0, 0);
+      
         clearPanel.SetActive(false);
         gamePanel.SetActive(true);
 
+        initPlayer();
+
         SceneManager.LoadScene("Stage_0");
+
     }
 
-    
+    public void initPlayer()
+    {
+        for (int i =0; i < 3; i++)
+            player.hasWeapon[i] = false;
+
+        player.equipWeapon.gameObject.SetActive(false);
+        player.equipWeapon = null;
+        player.isFireReady = true;
+
+        for (int i = 0; i <4; i++)
+            player.grenades[i].SetActive(false);
+
+        player.HasGrenades = 0;
+
+        player.Health = 100;
+        player.Coin = 10000;
+        player.Ammo = 300;
+        player.Life = 5;
+        player.score = 0;
+
+    }
+
+    public IEnumerator GameOver()
+    {
+        player.gameObject.layer = 11;
+        player.anim.SetTrigger("Die");
+
+        yield return new WaitForSeconds(1.5f);
+
+        gamePanel.SetActive(false);
+        gameOverPanel.SetActive(true);
+        finalScoreTxt.text = "Point: " + scoreTxt.text;
+    }
 }

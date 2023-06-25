@@ -37,6 +37,15 @@ public class Shop : MonoBehaviour
     {
 
         int price = itemPrices[index];
+        // 무기를 이미 가지고 있을때
+        if (enterPlayer.hasWeapon[index])
+        {
+            StopCoroutine(AlreadyHaveTalk());
+            StartCoroutine(AlreadyHaveTalk());
+            return;
+        }
+
+        // 가지고 있는 돈이 부족할때
         if (price > enterPlayer.Coin)
         {
             StopCoroutine(notEnoughTalk());
@@ -84,5 +93,14 @@ public class Shop : MonoBehaviour
         yield return new WaitForSeconds(2f);
         talktext.text = talkData[0];
     }
+
+    // 해당 무기를 소지하고 있을때 텍스트
+    IEnumerator AlreadyHaveTalk()
+    {
+        talktext.text = talkData[3];
+        yield return new WaitForSeconds(2f);
+        talktext.text = talkData[0];
+    }
+
 
 }

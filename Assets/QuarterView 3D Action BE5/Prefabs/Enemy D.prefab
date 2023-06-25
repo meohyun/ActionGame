@@ -173,6 +173,7 @@ MonoBehaviour:
   isAttack: 0
   isDead: 0
   target: {fileID: 0}
+  EnemyEbulletPos: {fileID: 0}
   meleeArea: {fileID: 1766089832}
   bullet: {fileID: 0}
   coins:

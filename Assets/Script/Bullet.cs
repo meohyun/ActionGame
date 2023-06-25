@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
+        if (!isMissile && !isMelee)
         StartCoroutine(selfDestory());
     }
 
@@ -30,15 +31,15 @@ public class Bullet : MonoBehaviour
         if (!isMissile && !isMelee && !isRock && other.gameObject.tag == "WorldObject")
             Destroy(gameObject);
 
-
+        // Boss의 Taunt 공겨
         if (isMelee && other.gameObject.tag == "Player")
         {
             Player player = other.GetComponent<Player>();
             player.Health -= damage;
         }
 
-        // Enemy E의 총알 사라
-        if (!isMissile && other.gameObject.tag == "Player")
+        // Enemy E의 총알 사라짐 
+        if (!isMissile && !isMelee && other.gameObject.tag == "Player")
             Destroy(gameObject);
     }
 

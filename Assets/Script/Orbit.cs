@@ -11,6 +11,8 @@ public class Orbit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        target = GameObject.FindWithTag("Player").transform;
+
         offset = transform.position - target.position;
     }
 

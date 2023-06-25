@@ -80,17 +80,22 @@ MonoBehaviour:
   enemyType: 2
   curHp: 100
   maxHp: 100
+  score: 200
   isChase: 0
   isAttack: 0
   isDead: 0
   target: {fileID: 0}
+  EnemyEbulletPos: {fileID: 0}
   meleeArea: {fileID: 0}
   bullet: {fileID: 0}
+  coins: []
+  explosionEffect: {fileID: 0}
   rb: {fileID: 5599170731389169965}
   boxCollider: {fileID: 5599170731389169967}
   meshs: []
   anim: {fileID: 0}
   nav: {fileID: 1831522621}
+  manager: {fileID: 0}
 --- !u!195 &1831522621
 NavMeshAgent:
   m_ObjectHideFlags: 0
