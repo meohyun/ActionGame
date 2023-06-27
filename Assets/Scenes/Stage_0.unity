@@ -14261,7 +14261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2409240896083652548, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: Life
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2409240896083652548, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: Health
@@ -14279,6 +14279,10 @@ PrefabInstance:
       propertyPath: followCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 2409240896083652548, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
+      propertyPath: grenadeGroup
+      value: 
+      objectReference: {fileID: 1769223964}
     - target: {fileID: 2409240896083652548, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: grenades.Array.size
       value: 4

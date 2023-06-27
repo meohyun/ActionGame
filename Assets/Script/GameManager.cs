@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         maxScoreTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
@@ -142,7 +141,8 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void reStart()
+    // 게임 오버 or 클리어시 재 시작   
+    public void reStart(bool isClear)
     {
         int maxScore = PlayerPrefs.GetInt("MaxScore");
 
@@ -152,10 +152,19 @@ public class GameManager : MonoBehaviour
         }
 
         player.isRestart = true;
-        
+        player.isDie = false;
+        //player.isDamage = false;
+
+        player.transform.gameObject.SetActive(true);
+        player.grenadeGroup.SetActive(true);
         player.transform.position = new Vector3(0, 0, 0);
-      
-        clearPanel.SetActive(false);
+        player.rb.velocity = Vector3.zero;
+
+        if (isClear)
+            clearPanel.SetActive(false);
+        else
+            gameOverPanel.SetActive(false);
+
         gamePanel.SetActive(true);
 
         initPlayer();
@@ -169,7 +178,9 @@ public class GameManager : MonoBehaviour
         for (int i =0; i < 3; i++)
             player.hasWeapon[i] = false;
 
-        player.equipWeapon.gameObject.SetActive(false);
+        // 무기가 없다
+        if (player.equipWeapon != null)
+            player.equipWeapon.gameObject.SetActive(false);
         player.equipWeapon = null;
         player.isFireReady = true;
 
@@ -192,6 +203,8 @@ public class GameManager : MonoBehaviour
         player.anim.SetTrigger("Die");
 
         yield return new WaitForSeconds(1.5f);
+        player.gameObject.SetActive(false);
+        player.grenadeGroup.SetActive(false);
 
         gamePanel.SetActive(false);
         gameOverPanel.SetActive(true);

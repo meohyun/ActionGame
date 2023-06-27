@@ -252,7 +252,7 @@ MonoBehaviour:
   scoreTxt: {fileID: 802892684}
   stageTxt: {fileID: 644706120}
   playTimeTxt: {fileID: 1930785591}
-  finalScoreTxt: {fileID: 0}
+  finalScoreTxt: {fileID: 129094412}
   playerLifeTxt: {fileID: 2133990930}
   playerHealthTxt: {fileID: 485585300}
   playerAmmoTxt: {fileID: 1648269083}
@@ -14109,10 +14109,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 36273189}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: reStart
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
