@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Item
+  - Melee
+  - Range
+  - Floor
+  - Weapon
+  - Bullet
+  - Enemy
+  - EnemyBullet
+  - Shop
+  - NPC
+  - Portal
+  - Manager
+  - WorldObject
+  - Wall
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - Bullet
+  - Wall
+  - Floor
+  - Enemy
+  - EnemyDead
+  - PlayerDead
+  - Item
+  - Grenade
+  - EnemyBullet
+  - GameObject
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
